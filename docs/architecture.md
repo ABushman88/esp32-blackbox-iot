@@ -8,7 +8,7 @@ The Device Model represents the physical ESP32 unit used for data collection.
 - owner: The user who owns and manages the device
 
 ### SensorReading
-The Sensorreading model represents individual data points colected from sensors connected to a device.
+The SensorReading model represents individual data points colected from sensors connected to a device.
 
 - device: The device that generated the reading (foreign key relationship)
 - sensor_type: The type of sensor data (e.g., temperature, humidity)
