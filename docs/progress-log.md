@@ -5,4 +5,4 @@
 - Defined project structure
 - Wrote initial proposal
 
-- Testing
+- Testing changes
