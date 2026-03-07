@@ -37,7 +37,8 @@ ESP32 → HTTP → Django Backend → Database → Web Dashboard
 ---
 
 ## Project Status
-In development (Agile sprints)
+- Sprint 1
+  Create GitHub repository and Django project environment
 
 ---
 
