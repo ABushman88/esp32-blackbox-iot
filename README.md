@@ -1,4 +1,4 @@
-# ESP32 Black Box IoT Data Logger
+# ESP32 Telemetry Data Logging Platform
 
 ## Overview
 This project is a cloud-connected modular black box system that collects sensor data using ESP32 and stores it locally and remotely using a Django-based web application.
@@ -37,7 +37,7 @@ ESP32 → HTTP → Django Backend → Database → Web Dashboard
 ---
 
 ## Project Status
-In development (Agile sprints)
+- Sprint 1 - Create GitHub repository and Django project environment
 
 ---
 
