@@ -1,0 +1,117 @@
+{% extends "devices/base.html" %}
+
+{% block title %}Admin Dashboard - ESP32 Telemetry Platform{% endblock %}
+
+{% block body_class %} class="dashboard-body"{% endblock %}
+
+{% block content %}
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-container">
+            <h2>ESP32 Telemetry Platform</h2>
+            <div class="navbar-right">
+                <div class="user-info">
+                    Welcome, <strong>{{ user.username }}</strong>
+                </div>
+                <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="{% if message.tags %}{{ message.tags }}{% endif %}-message" style="margin-bottom: 20px;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Statistics Cards -->
+        <div class="dashboard-grid">
+            <div class="card">
+                <h3>Total Devices</h3>
+                <div class="stat-value">{{ total_devices }}</div>
+                <div class="stat-label">Active IoT Devices</div>
+            </div>
+            <div class="card">
+                <h3>Sensor Records</h3>
+                <div class="stat-value">{{ total_sensor_data }}</div>
+                <div class="stat-label">Total Data Points</div>
+            </div>
+            <div class="card">
+                <h3>Active Users</h3>
+                <div class="stat-value">{{ total_users }}</div>
+                <div class="stat-label">Registered Users</div>
+            </div>
+        </div>
+
+        <!-- Devices Section -->
+        <h2 class="section-title">📱 Devices</h2>
+        {% if devices %}
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Device Name</th>
+                        <th>Device ID</th>
+                        <th>Location</th>
+                        <th>Created At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for device in devices %}
+                        <tr>
+                            <td>{{ device.name }}</td>
+                            <td>{{ device.device_id }}</td>
+                            <td>{{ device.location|default:"N/A" }}</td>
+                            <td>{{ device.created_at|default:"N/A" }}</td>
+                            <td>
+                                <a href="{% url 'edit_device' device.id %}" class="action-btn action-btn-edit">Edit</a>
+                                <a href="{% url 'delete_device' device.id %}" class="action-btn action-btn-delete" onclick="return confirm('Are you sure?');">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="card">
+                <p>No devices found. Start by adding a new device.</p>
+            </div>
+        {% endif %}
+
+        <!-- Recent Sensor Data -->
+        <h2 class="section-title" style="margin-top: 40px;">📊 Recent Sensor Data</h2>
+        {% if sensor_data %}
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Device</th>
+                        <th>Temperature (°C)</th>
+                        <th>Humidity (%)</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in sensor_data %}
+                        <tr>
+                            <td>{{ data.device.name }}</td>
+                            <td>{{ data.temperature }}</td>
+                            <td>{{ data.humidity }}</td>
+                            <td>{{ data.timestamp|date:"Y-m-d H:i:s" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="card">
+                <p>No sensor data available yet.</p>
+            </div>
+        {% endif %}
+
+        <!-- Quick Actions -->
+        <div style="margin-top: 40px; text-align: center;">
+            <a href="{% url 'add_device' %}" class="btn btn-primary" style="display: inline-block; padding: 12px 30px; text-decoration: none; border-radius: 5px;">+ Add New Device</a>
+        </div>
+    </div>
+{% endblock %}
