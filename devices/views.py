@@ -11,6 +11,23 @@ from .serializers import SensorDataSerializer
 from django.views.decorators.csrf import csrf_exempt
 
 # ============================================================================
+#                          HOMEPAGE VIEW
+# ============================================================================
+
+def homepage(request):
+    """Display homepage - landing page for unauthenticated users, dashboard redirect for authenticated"""
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    
+    context = {
+        'total_devices': Device.objects.count(),
+        'total_sensor_readings': SensorData.objects.count(),
+    }
+    
+    return render(request, 'devices/homepage.html', context)
+
+
+# ============================================================================
 #                          AUTHENTICATION VIEWS
 # ============================================================================
 
@@ -167,6 +184,50 @@ def edit_device(request, device_id):
     
     context = {'device': device}
     return render(request, 'devices/edit_device.html', context)
+
+
+@login_required(login_url='login')
+@require_http_methods(["GET"])
+def device_detail(request, device_id):
+    """Display device details with sensor data chart"""
+    device = get_object_or_404(Device, id=device_id)
+    
+    # Get sensor data for this device, sorted by timestamp
+    sensor_data = SensorData.objects.filter(device=device).order_by('timestamp')
+    
+    # Prepare data for chart
+    timestamps = [data.timestamp.strftime('%Y-%m-%d %H:%M:%S') for data in sensor_data]
+    temperatures = [data.temperature for data in sensor_data]
+    humidities = [data.humidity for data in sensor_data]
+    
+    # Calculate statistics
+    if sensor_data.exists():
+        avg_temp = sum(temperatures) / len(temperatures)
+        max_temp = max(temperatures)
+        min_temp = min(temperatures)
+        avg_humidity = sum(humidities) / len(humidities)
+        max_humidity = max(humidities)
+        min_humidity = min(humidities)
+    else:
+        avg_temp = max_temp = min_temp = 0
+        avg_humidity = max_humidity = min_humidity = 0
+    
+    context = {
+        'device': device,
+        'sensor_data': sensor_data,
+        'timestamps': timestamps,
+        'temperatures': temperatures,
+        'humidities': humidities,
+        'total_readings': sensor_data.count(),
+        'avg_temp': round(avg_temp, 2),
+        'max_temp': max_temp,
+        'min_temp': min_temp,
+        'avg_humidity': round(avg_humidity, 2),
+        'max_humidity': max_humidity,
+        'min_humidity': min_humidity,
+    }
+    
+    return render(request, 'devices/device_detail.html', context)
 
 
 @login_required(login_url='login')

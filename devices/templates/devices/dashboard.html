@@ -62,11 +62,16 @@
                 <tbody>
                     {% for device in devices %}
                         <tr>
-                            <td>{{ device.name }}</td>
+                            <td>
+                                <a href="{% url 'device_detail' device.id %}" style="color: #667eea; text-decoration: none; font-weight: 600; cursor: pointer;">
+                                    {{ device.name }}
+                                </a>
+                            </td>
                             <td>{{ device.device_id }}</td>
                             <td>{{ device.location|default:"N/A" }}</td>
                             <td>{{ device.created_at|default:"N/A" }}</td>
                             <td>
+                                <a href="{% url 'device_detail' device.id %}" class="action-btn action-btn-edit">View</a>
                                 <a href="{% url 'edit_device' device.id %}" class="action-btn action-btn-edit">Edit</a>
                                 <a href="{% url 'delete_device' device.id %}" class="action-btn action-btn-delete" onclick="return confirm('Are you sure?');">Delete</a>
                             </td>
@@ -81,28 +86,30 @@
         {% endif %}
 
         <!-- Recent Sensor Data -->
-        <h2 class="section-title" style="margin-top: 40px;">📊 Recent Sensor Data</h2>
+        <h2 class="section-title">📊 Recent Sensor Data</h2>
         {% if sensor_data %}
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Device</th>
-                        <th>Temperature (°C)</th>
-                        <th>Humidity (%)</th>
-                        <th>Timestamp</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for data in sensor_data %}
+            <div class="table-wrapper">
+                <table>
+                    <thead>
                         <tr>
-                            <td>{{ data.device.name }}</td>
-                            <td>{{ data.temperature }}</td>
-                            <td>{{ data.humidity }}</td>
-                            <td>{{ data.timestamp|date:"Y-m-d H:i:s" }}</td>
+                            <th>Device</th>
+                            <th>Temperature (°C)</th>
+                            <th>Humidity (%)</th>
+                            <th>Timestamp</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for data in sensor_data %}
+                            <tr>
+                                <td>{{ data.device.name }}</td>
+                                <td>{{ data.temperature }}</td>
+                                <td>{{ data.humidity }}</td>
+                                <td>{{ data.timestamp|date:"Y-m-d H:i:s" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         {% else %}
             <div class="card">
                 <p>No sensor data available yet.</p>
