@@ -9,6 +9,8 @@ from rest_framework.response import Response
 from .models import Device, SensorData
 from .serializers import SensorDataSerializer
 from django.views.decorators.csrf import csrf_exempt
+from datetime import timedelta
+from django.utils import timezone
 
 # ============================================================================
 #                          HOMEPAGE VIEW
@@ -17,7 +19,7 @@ from django.views.decorators.csrf import csrf_exempt
 def homepage(request):
     """Display homepage - landing page for unauthenticated users, dashboard redirect for authenticated"""
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect('feed')
     
     context = {
         'total_devices': Device.objects.count(),
@@ -25,6 +27,45 @@ def homepage(request):
     }
     
     return render(request, 'devices/homepage.html', context)
+
+
+@login_required(login_url='login')
+def feed(request):
+    now = timezone.now()
+    posts = [
+        {
+            'id': 1,
+            'author': 'alex',
+            'device_name': 'CNC Mill A12',
+            'location': 'Shop Floor',
+            'timestamp': now - timedelta(minutes=6),
+            'temperature': 33.4,
+            'humidity': 41.2,
+            'message': 'Vibration stable. Temp trending slightly up under load.',
+        },
+        {
+            'id': 2,
+            'author': 'maria',
+            'device_name': 'Compressor 7',
+            'location': 'Utility Room',
+            'timestamp': now - timedelta(minutes=18),
+            'temperature': 29.1,
+            'humidity': 52.8,
+            'message': 'Air output nominal. Pressure spikes resolved after filter change.',
+        },
+        {
+            'id': 3,
+            'author': 'sam',
+            'device_name': 'Lathe B03',
+            'location': 'Bay 2',
+            'timestamp': now - timedelta(hours=1, minutes=4),
+            'temperature': 31.7,
+            'humidity': 38.6,
+            'message': 'Coolant cycle looks good. Monitoring for any drift.',
+        },
+    ]
+
+    return render(request, 'devices/feed.html', {'posts': posts})
 
 
 # ============================================================================
@@ -45,7 +86,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(request, f'Welcome back, {username}!')
-            return redirect('dashboard')
+            return redirect('feed')
         else:
             messages.error(request, 'Invalid username or password.')
     

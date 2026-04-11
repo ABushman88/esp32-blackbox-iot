@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
     # Homepage
     path('', views.homepage, name='homepage'),
+
+    path('feed/', views.feed, name='feed'),
     
     # Authentication URLs
     path('login/', views.login_view, name='login'),

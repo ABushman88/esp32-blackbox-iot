@@ -1,0 +1,56 @@
+{% extends "devices/base.html" %}
+
+{% block title %}Feed - ESP32 Telemetry Platform{% endblock %}
+
+{% block body_class %} class="dashboard-body"{% endblock %}
+
+{% block content %}
+    <div class="navbar">
+        <div class="navbar-container">
+            <h2>ESP32 Telemetry Platform</h2>
+            <div class="navbar-right">
+                <a href="{% url 'dashboard' %}" class="logout-btn" style="text-decoration: none;">Dashboard</a>
+                <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="max-width: 900px;">
+        <h2 style="margin: 24px 0 16px 0;">Machine Feed</h2>
+
+        {% for post in posts %}
+            <div class="card" style="margin-bottom: 16px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                    <div>
+                        <div style="font-weight: 700; font-size: 1.05rem;">
+                            {{ post.device_name }}
+                            <span style="opacity: 0.7; font-weight: 600;">· {{ post.location }}</span>
+                        </div>
+                        <div style="opacity: 0.75; margin-top: 4px;">
+                            Posted by <strong>{{ post.author }}</strong> · {{ post.timestamp|date:"M d, Y" }} {{ post.timestamp|time:"H:i" }}
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-weight: 700;">{{ post.temperature }}°C</div>
+                        <div style="opacity: 0.75;">{{ post.humidity }}% humidity</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 14px; line-height: 1.6;">
+                    {{ post.message }}
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;">
+                    <button class="logout-btn" type="button">Like</button>
+                    <button class="logout-btn" type="button" onclick="document.getElementById('comment-{{ post.id }}').focus()">Comment</button>
+                    <button class="logout-btn" type="button">Share</button>
+                </div>
+
+                <div style="margin-top: 12px; display: flex; gap: 10px;">
+                    <input id="comment-{{ post.id }}" type="text" placeholder="Write a comment…" style="flex: 1; padding: 10px 12px; border-radius: 10px; border: 1px solid #334155; background: rgba(15, 23, 42, 0.6); color: #e2e8f0;" />
+                    <button class="logout-btn" type="button">Post</button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
