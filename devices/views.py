@@ -35,7 +35,7 @@ def homepage(request):
 def login_view(request):
     """Handle user login"""
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect('homepage')
     
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -56,7 +56,7 @@ def login_view(request):
 def register_view(request):
     """Handle user registration"""
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect('homepage')
     
     if request.method == 'POST':
         username = request.POST.get('username')
