@@ -16,9 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 def homepage(request):
     """Display homepage - landing page for unauthenticated users, dashboard redirect for authenticated"""
-    if request.user.is_authenticated:
-        return redirect('dashboard')
-    
+
     context = {
         'total_devices': Device.objects.count(),
         'total_sensor_readings': SensorData.objects.count(),
@@ -35,7 +33,7 @@ def homepage(request):
 def login_view(request):
     """Handle user login"""
     if request.user.is_authenticated:
-        return redirect('homepage')
+        return redirect('dashboard')
     
     if request.method == 'POST':
         username = request.POST.get('username')
