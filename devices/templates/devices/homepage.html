@@ -37,11 +37,33 @@
             font-weight: 700;
             color: #7c3aed;
             text-decoration: none;
+            flex: 1;
+        }
+
+        .navbar-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .navbar-center .stat-number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #7c3aed;
+        }
+
+        .navbar-center .stat-label {
+            font-size: 1rem;
+            color: #cbd5e1;
         }
 
         .navbar-links {
             display: flex;
             gap: 1rem;
+            flex: 1;
+            justify-content: flex-end;
         }
 
         .navbar-links a {
@@ -145,89 +167,146 @@
             transform: translateY(-3px);
         }
 
-        /* Stats Section */
-        .stats-section {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(10px);
+        /* Feed */
+        .feed {
+            flex: 1;
             padding: 2rem;
             display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            border-top: 1px solid #334155;
-            border-bottom: 1px solid #334155;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
         }
 
-        .stat-card {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #7c3aed;
-        }
-
-        .stat-label {
+        .feed-title {
             font-size: 1rem;
-            opacity: 0.9;
-            color: #cbd5e1;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            align-self: flex-start;
+            max-width: 640px;
+            width: 100%;
         }
 
-        /* Features Section */
-        .features-section {
-            background: transparent;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        .features-section h2 {
-            font-size: 2.5rem;
-            color: #e0e7ff;
-            margin-bottom: 3rem;
-            font-weight: 700;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            padding: 2rem;
+        .post-card {
             background: #1e293b;
-            border-radius: 12px;
-            transition: all 0.3s ease;
             border: 1px solid #334155;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            max-width: 640px;
+            width: 100%;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: border-color 0.2s ease;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 32px rgba(124, 58, 237, 0.2);
+        .post-card:hover {
             border-color: #7c3aed;
         }
 
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.9rem;
         }
 
-        .feature-card h3 {
-            font-size: 1.3rem;
-            color: #7c3aed;
-            margin-bottom: 0.5rem;
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .post-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-username {
+            font-weight: 600;
+            color: #e0e7ff;
+            font-size: 0.95rem;
+        }
+
+        .post-time {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .post-device-tag {
+            margin-left: auto;
+            background: rgba(124, 58, 237, 0.15);
+            color: #a78bfa;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 20px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.78rem;
             font-weight: 600;
         }
 
-        .feature-card p {
+        .post-body {
             color: #cbd5e1;
-            line-height: 1.6;
             font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .post-readings {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .reading-chip {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.82rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .reading-chip .reading-label {
+            color: #64748b;
+        }
+
+        .reading-chip .reading-value {
+            color: #7c3aed;
+            font-weight: 700;
+        }
+
+        .post-footer {
+            display: flex;
+            gap: 1.2rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(51, 65, 85, 0.5);
+        }
+
+        .post-action {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0;
+            transition: color 0.2s;
+        }
+
+        .post-action:hover {
+            color: #7c3aed;
         }
 
         /* Footer */
@@ -263,22 +342,13 @@
                 font-size: 1rem;
             }
 
-            .stats-section {
-                gap: 1.5rem;
-                padding: 1.5rem;
-            }
-
-            .stat-number {
-                font-size: 2rem;
-            }
-
-            .features-section h2 {
-                font-size: 1.8rem;
-            }
-
             .navbar-homepage {
                 flex-direction: column;
                 gap: 1rem;
+            }
+
+            .navbar-center {
+                order: 2;
             }
 
             .navbar-links {
@@ -290,84 +360,180 @@
 </head>
 <body class="homepage-body">
     <div class="homepage-container">
-        <!-- Navigation -->
-        <nav class="navbar-homepage">
-            <span class="navbar-brand">🚀 ESP32 Telemetry</span>
-            <div class="navbar-links">
-                <a href="{% url 'login' %}" class="btn-login">Login</a>
-                <a href="{% url 'register' %}" class="btn-register">Register</a>
-            </div>
-        </nav>
 
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Welcome to ESP32 Telemetry Platform</h1>
-                <p>Manage, monitor, and analyze data from your IoT devices in real-time. Connect your ESP32 microcontrollers and track sensor data effortlessly.</p>
-                <div class="hero-buttons">
-                    <a href="{% url 'register' %}" class="btn-primary">Get Started</a>
-                    <a href="{% url 'login' %}" class="btn-secondary">Sign In</a>
-                </div>
-            </div>
-        </section>
+        {% if user.is_authenticated %}
 
-        <!-- Stats Section -->
-        <section class="stats-section">
-            <div class="stat-card">
-                <div class="stat-number">{{ total_devices }}</div>
-                <div class="stat-label">Active Devices</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">{{ total_sensor_readings }}</div>
-                <div class="stat-label">Sensor Readings</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">Real-time Monitoring</div>
-            </div>
-        </section>
+            <!-- Authenticated: Navbar + Feed -->
+            <nav class="navbar-homepage">
+                <span class="navbar-brand">🚀 ESP32 Telemetry</span>
+                <div class="navbar-center">
+                    <span class="stat-number">{{ total_devices }}</span>
+                    <span class="stat-label">Active Devices</span>
+                </div>
+                <div class="navbar-links">
+                    <a href="{% url 'dashboard' %}" class="btn-register">Dashboard</a>
+                    <a href="{% url 'logout' %}" class="btn-login">Logout</a>
+                </div>
+            </nav>
 
-        <!-- Features Section -->
-        <section class="features-section">
-            <h2>Platform Features</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Real-time Data</h3>
-                    <p>Monitor sensor data from your ESP32 devices in real-time with instant updates and live dashboards.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔧</div>
-                    <h3>Device Management</h3>
-                    <p>Easily add, edit, and manage multiple IoT devices with a user-friendly interface.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔐</div>
-                    <h3>Secure Access</h3>
-                    <p>Protect your data with secure authentication and role-based access control.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3>Data Analytics</h3>
-                    <p>Visualize and analyze sensor data to gain valuable insights about your IoT systems.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>REST API</h3>
-                    <p>Integrate with external systems using our comprehensive REST API for ESP32 devices.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Lightning Fast</h3>
-                    <p>Experience fast and reliable performance with optimized database queries and caching.</p>
-                </div>
-            </div>
-        </section>
+            <!-- Community Feed -->
+            <main class="feed">
+                <p class="feed-title">Community Feed</p>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p>&copy; 2024 ESP32 Telemetry Platform. All rights reserved. | Powered by Django & IoT</p>
-        </footer>
+                <!-- Post 1 -->
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-avatar">AJ</div>
+                        <div class="post-meta">
+                            <span class="post-username">alex_johnson</span>
+                            <span class="post-time">2 minutes ago</span>
+                        </div>
+                        <span class="post-device-tag">🔧 ESP32-Greenhouse-01</span>
+                    </div>
+                    <p class="post-body">Greenhouse is holding steady today! Humidity spiked a bit around noon but the ventilation kicked in automatically. Pretty happy with how this setup is running.</p>
+                    <div class="post-readings">
+                        <div class="reading-chip"><span class="reading-label">🌡️ Temp</span><span class="reading-value">24.3 °C</span></div>
+                        <div class="reading-chip"><span class="reading-label">💧 Humidity</span><span class="reading-value">68%</span></div>
+                        <div class="reading-chip"><span class="reading-label">☀️ Light</span><span class="reading-value">812 lux</span></div>
+                        <div class="reading-chip"><span class="reading-label">🌱 Soil</span><span class="reading-value">42%</span></div>
+                    </div>
+                    <div class="post-footer">
+                        <button class="post-action">👍 14</button>
+                        <button class="post-action">💬 3 Comments</button>
+                        <button class="post-action">🔗 Share</button>
+                    </div>
+                </div>
+
+                <!-- Post 2 -->
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-avatar">MR</div>
+                        <div class="post-meta">
+                            <span class="post-username">maria_r</span>
+                            <span class="post-time">18 minutes ago</span>
+                        </div>
+                        <span class="post-device-tag">🔧 ESP32-AirQuality-Home</span>
+                    </div>
+                    <p class="post-body">CO₂ levels went up noticeably when I started cooking dinner — good reminder to crack a window. Sensor is working perfectly after the recalibration last week.</p>
+                    <div class="post-readings">
+                        <div class="reading-chip"><span class="reading-label">💨 CO₂</span><span class="reading-value">1,240 ppm</span></div>
+                        <div class="reading-chip"><span class="reading-label">🌡️ Temp</span><span class="reading-value">21.8 °C</span></div>
+                        <div class="reading-chip"><span class="reading-label">💧 Humidity</span><span class="reading-value">55%</span></div>
+                        <div class="reading-chip"><span class="reading-label">🏭 VOC</span><span class="reading-value">0.12 mg/m³</span></div>
+                    </div>
+                    <div class="post-footer">
+                        <button class="post-action">👍 9</button>
+                        <button class="post-action">💬 5 Comments</button>
+                        <button class="post-action">🔗 Share</button>
+                    </div>
+                </div>
+
+                <!-- Post 3 -->
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-avatar">TK</div>
+                        <div class="post-meta">
+                            <span class="post-username">t_kowalski</span>
+                            <span class="post-time">1 hour ago</span>
+                        </div>
+                        <span class="post-device-tag">🔧 ESP32-WeatherStation-v2</span>
+                    </div>
+                    <p class="post-body">Had a big storm roll through last night — pressure dropped hard before it hit. Love having the barometric sensor for this. The wind gust hit 67 km/h at peak, blew my old anemometer bracket loose but the device itself survived fine.</p>
+                    <div class="post-readings">
+                        <div class="reading-chip"><span class="reading-label">🌬️ Wind</span><span class="reading-value">22 km/h</span></div>
+                        <div class="reading-chip"><span class="reading-label">🌧️ Rain</span><span class="reading-value">18.4 mm</span></div>
+                        <div class="reading-chip"><span class="reading-label">📊 Pressure</span><span class="reading-value">998 hPa</span></div>
+                        <div class="reading-chip"><span class="reading-label">🌡️ Temp</span><span class="reading-value">17.1 °C</span></div>
+                    </div>
+                    <div class="post-footer">
+                        <button class="post-action">👍 31</button>
+                        <button class="post-action">💬 11 Comments</button>
+                        <button class="post-action">🔗 Share</button>
+                    </div>
+                </div>
+
+                <!-- Post 4 -->
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-avatar">SL</div>
+                        <div class="post-meta">
+                            <span class="post-username">sara_liu</span>
+                            <span class="post-time">3 hours ago</span>
+                        </div>
+                        <span class="post-device-tag">🔧 ESP32-ServerRoom-Monitor</span>
+                    </div>
+                    <p class="post-body">Set up alerts for anything above 28 °C in the server room. Thankfully everything is nominal this week. Power draw is a bit higher than usual though — investigating if one of the UPS units is running hot.</p>
+                    <div class="post-readings">
+                        <div class="reading-chip"><span class="reading-label">🌡️ Temp</span><span class="reading-value">22.6 °C</span></div>
+                        <div class="reading-chip"><span class="reading-label">💧 Humidity</span><span class="reading-value">38%</span></div>
+                        <div class="reading-chip"><span class="reading-label">⚡ Power</span><span class="reading-value">4.7 kW</span></div>
+                        <div class="reading-chip"><span class="reading-label">📡 Uptime</span><span class="reading-value">99.98%</span></div>
+                    </div>
+                    <div class="post-footer">
+                        <button class="post-action">👍 22</button>
+                        <button class="post-action">💬 7 Comments</button>
+                        <button class="post-action">🔗 Share</button>
+                    </div>
+                </div>
+
+                <!-- Post 5 -->
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-avatar">DN</div>
+                        <div class="post-meta">
+                            <span class="post-username">d_nguyen</span>
+                            <span class="post-time">5 hours ago</span>
+                        </div>
+                        <span class="post-device-tag">🔧 ESP32-AquariumCtrl-01</span>
+                    </div>
+                    <p class="post-body">pH drifted slightly overnight — bumped the buffer dosing schedule up by 5 minutes. The fish seem happy regardless. Water temp is rock solid with the new PID controller I flashed last weekend.</p>
+                    <div class="post-readings">
+                        <div class="reading-chip"><span class="reading-label">🧪 pH</span><span class="reading-value">7.2</span></div>
+                        <div class="reading-chip"><span class="reading-label">🌡️ Water Temp</span><span class="reading-value">26.0 °C</span></div>
+                        <div class="reading-chip"><span class="reading-label">💡 Light Cycle</span><span class="reading-value">10 h on</span></div>
+                        <div class="reading-chip"><span class="reading-label">🔄 Flow</span><span class="reading-value">3.2 L/min</span></div>
+                    </div>
+                    <div class="post-footer">
+                        <button class="post-action">👍 18</button>
+                        <button class="post-action">💬 6 Comments</button>
+                        <button class="post-action">🔗 Share</button>
+                    </div>
+                </div>
+
+            </main>
+
+            <footer class="footer">
+                <p>&copy; 2024 ESP32 Telemetry Platform. All rights reserved. | Powered by Django & IoT</p>
+            </footer>
+
+        {% else %}
+
+            <!-- Guest: Navbar + Hero + Footer, no device stats -->
+            <nav class="navbar-homepage">
+                <span class="navbar-brand">🚀 ESP32 Telemetry</span>
+                <div class="navbar-links">
+                    <a href="{% url 'login' %}" class="btn-login">Login</a>
+                    <a href="{% url 'register' %}" class="btn-register">Register</a>
+                </div>
+            </nav>
+
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Welcome to ESP32 Telemetry Platform</h1>
+                    <p>Manage, monitor, and analyze data from your IoT devices in real-time. Connect your ESP32 microcontrollers and track sensor data effortlessly.</p>
+                    <div class="hero-buttons">
+                        <a href="{% url 'register' %}" class="btn-primary">Get Started</a>
+                        <a href="{% url 'login' %}" class="btn-secondary">Sign In</a>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <p>&copy; 2024 ESP32 Telemetry Platform. All rights reserved. | Powered by Django & IoT</p>
+            </footer>
+
+        {% endif %}
+
     </div>
 </body>
 </html>
